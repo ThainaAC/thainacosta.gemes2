@@ -1,19 +1,25 @@
 package application.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="generos")
+@Table(name = "generos")
 public class Genero {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nome;  
-
+    private String nome;
+    
+    @OneToMany(mappedBy = "genero")
+    private Set<Jogo> jogos = new HashSet<>();
 
     public int getId() {
         return id;
@@ -27,5 +33,10 @@ public class Genero {
     public void setNome(String nome) {
         this.nome = nome;
     }
-   
+    public Set<Jogo> getJogos() {
+        return jogos;
+    }
+    public void setJogos(Set<Jogo> jogos) {
+        this.jogos = jogos;
+    }
 }
